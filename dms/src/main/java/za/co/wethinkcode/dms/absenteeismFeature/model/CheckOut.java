@@ -26,7 +26,7 @@ public class CheckOut implements Checks {
         return new CheckOut(username, time, date, time.isAfter(LocalTime.parse("18:00")), true);
     }
 
-    private CheckOut(String username, LocalTime time, LocalDate date, boolean checkedOutLate, boolean isCheckedOut) {
+    public CheckOut(String username, LocalTime time, LocalDate date, boolean checkedOutLate, boolean isCheckedOut) {
         this.username = username;
         this.time = time;
         this.date = date;

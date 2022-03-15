@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CheckOutTests {
+public class CheckOutRepositoryTests {
 
     @Test
     @DisplayName("A normal checkout")

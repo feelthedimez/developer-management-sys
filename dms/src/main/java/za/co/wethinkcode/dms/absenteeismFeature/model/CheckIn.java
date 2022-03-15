@@ -26,7 +26,7 @@ public class CheckIn implements Checks {
         return new CheckIn(username, time, date, time.isAfter(LocalTime.parse("10:30")), true);
     }
 
-    private CheckIn(String username, LocalTime time, LocalDate date, boolean isLate, boolean isCheckedIn) {
+    public CheckIn(String username, LocalTime time, LocalDate date, boolean isLate, boolean isCheckedIn) {
         this.username = username;
         this.time = time;
         this.date = date;
