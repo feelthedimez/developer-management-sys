@@ -27,7 +27,6 @@ public class CheckOutTests {
         CheckOut checkOut = CheckOut.createCheckOut("tetema", LocalTime.parse("18:20"), LocalDate.now());
         assertThat(checkOut).isNotNull();
         assertThat(checkOut.isCheckedOut()).isTrue();
-        assertThat(checkOut.isCheckedOut()).isTrue();
         assertThat(checkOut.getDate()).isEqualTo(LocalDate.now());
     }
 
