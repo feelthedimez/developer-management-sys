@@ -17,5 +17,5 @@ jobs:
           distribution: 'adopt'
           
       - name: Building & Testing with Maven
-        run: ls
+        run: mvn test
         working-directory: ${{ env.working-directory }}
