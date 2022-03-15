@@ -5,10 +5,14 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./dms
     
     steps:
       - uses: actions/checkout@v2
       - name: Setup JDK 11
+        working-directory:
         uses: actions/setup-java@v2
         with:
           java-version: '11'

@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./dms
     
     steps:
       - uses: actions/checkout@v2
@@ -13,5 +15,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          
       - name: Building & Testing with Maven
-        run: pwd
+        run: mvn test
+        working-directory: ${{ env.working-directory }}
