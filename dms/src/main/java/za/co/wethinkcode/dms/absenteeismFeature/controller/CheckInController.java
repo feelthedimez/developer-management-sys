@@ -17,6 +17,6 @@ public class CheckInController {
 
     @GetMapping("/all/checkin/{username}")
     public List<CheckIn> getAllCheckIns(@PathVariable String username) {
-        return Arrays.asList(CheckIn.getCheckIn(username, LocalTime.parse("10:20"), LocalDate.now()));
+        return Arrays.asList(CheckIn.createCheckIn(username, LocalTime.parse("10:20"), LocalDate.now()));
     }
 }
