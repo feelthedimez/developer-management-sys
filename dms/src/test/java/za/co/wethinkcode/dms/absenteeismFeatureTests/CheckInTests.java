@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class ChecksTests {
+public class CheckInTests {
 
     @Test
     @DisplayName("A normal checking in")
@@ -51,23 +51,5 @@ public class ChecksTests {
         assertThat(checkIn.getTime()).isNull();
     }
 
-    @Test
-    @DisplayName("A normal checkout")
-    void TestNormalCheckOut() {
-        CheckOut checkOut = CheckOut.createCheckOut("tetema", LocalTime.parse("16:30"), LocalDate.now());
-        assertThat(checkOut).isNotNull();
-        assertThat(checkOut.isCheckedOut()).isTrue();
-        assertThat(checkOut.isCheckedOutLate()).isFalse();
-    }
-
-    @Test
-    @DisplayName("Check when you checkout late")
-    void TestCheckOutLate() {
-        CheckOut checkOut = CheckOut.createCheckOut("tetema", LocalTime.parse("18:20"), LocalDate.now());
-        assertThat(checkOut).isNotNull();
-        assertThat(checkOut.isCheckedOut()).isTrue();
-        assertThat(checkOut.isCheckedOut()).isTrue();
-        assertThat(checkOut.getDate()).isEqualTo(LocalDate.now());
-    }
 
 }
