@@ -8,9 +8,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Set Up JDK 11
       - uses: actions/setup-java@v2
         with:
           java-version: '11'
       - name: Building with Maven
-        run: mvn test
+      - run: mvn test
