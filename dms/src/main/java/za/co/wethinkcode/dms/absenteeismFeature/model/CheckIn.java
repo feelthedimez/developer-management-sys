@@ -1,23 +1,13 @@
 package za.co.wethinkcode.dms.absenteeismFeature.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
 public class CheckIn implements Checks {
-    @Id
-    @Column(nullable = false)
     private String username;
-    @Column(nullable = false)
     private LocalDate date;
-    @Column(nullable = false)
     private LocalTime time;
-    @Column(nullable = false)
     private boolean isLate;
-    @Column(nullable = false)
     private boolean isCheckedIn;
 
     public CheckIn() {}
