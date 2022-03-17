@@ -1,4 +1,4 @@
-package za.co.wethinkcode.dms.absenteeismFeature.reponses;
+package za.co.wethinkcode.dms.absenteeismFeature.exceptionResponses;
 
 public class ApiErrorResponse {
     private final String errorMessage;

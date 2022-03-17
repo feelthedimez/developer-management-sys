@@ -2,7 +2,8 @@ package za.co.wethinkcode.dms.absenteeismFeatureTests.modelTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.dms.absenteeismFeature.reponses.ApiSuccessResponse;
+import za.co.wethinkcode.dms.absenteeismFeature.exceptionResponses.ApiErrorResponse;
+import za.co.wethinkcode.dms.absenteeismFeature.exceptionResponses.ApiSuccessResponse;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

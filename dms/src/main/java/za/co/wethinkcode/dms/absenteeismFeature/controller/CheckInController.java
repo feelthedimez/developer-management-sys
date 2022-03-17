@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.wethinkcode.dms.absenteeismFeature.entities.CheckInEntity;
-import za.co.wethinkcode.dms.absenteeismFeature.reponses.ApiErrorResponse;
-import za.co.wethinkcode.dms.absenteeismFeature.reponses.ApiSuccessResponse;
+import za.co.wethinkcode.dms.absenteeismFeature.exceptionResponses.ApiErrorResponse;
+import za.co.wethinkcode.dms.absenteeismFeature.exceptionResponses.ApiSuccessResponse;
 import za.co.wethinkcode.dms.absenteeismFeature.model.CheckIn;
 import za.co.wethinkcode.dms.absenteeismFeature.services.CheckInService;
 import java.time.LocalDate;
@@ -24,14 +24,13 @@ public class CheckInController {
 
     @PostMapping("/checkin")
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
-
         try {
             checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
-            return new ResponseEntity<>(
+            return new ResponseEntity<ApiSuccessResponse>(
                     new ApiSuccessResponse(201, "Check In Successful"), HttpStatus.CREATED
             );
-        } catch (NullPointerException e) {
-            return new ResponseEntity<>(
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<ApiErrorResponse>(
                     new ApiErrorResponse(500, "Failed to Check in"), HttpStatus.BAD_REQUEST
             );
         }
