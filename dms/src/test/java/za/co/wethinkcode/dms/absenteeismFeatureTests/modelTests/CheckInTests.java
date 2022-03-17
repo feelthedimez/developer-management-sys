@@ -1,4 +1,4 @@
-package za.co.wethinkcode.dms.absenteeismFeatureTests;
+package za.co.wethinkcode.dms.absenteeismFeatureTests.modelTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

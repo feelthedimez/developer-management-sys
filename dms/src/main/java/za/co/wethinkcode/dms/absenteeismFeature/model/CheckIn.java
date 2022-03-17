@@ -1,5 +1,9 @@
 package za.co.wethinkcode.dms.absenteeismFeature.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -7,7 +11,9 @@ public class CheckIn implements Checks {
     private String username;
     private LocalDate date;
     private LocalTime time;
+    @JsonIgnore
     private boolean isLate;
+    @JsonIgnore
     private boolean isCheckedIn;
 
     public CheckIn() {}
@@ -47,6 +53,14 @@ public class CheckIn implements Checks {
                 ", isLate=" + isLate +
                 ", isCheckedIn=" + isCheckedIn +
                 '}';
+    }
+
+    public void setLate(boolean late) {
+        isLate = late;
+    }
+
+    public void setCheckedIn(boolean checkedIn) {
+        isCheckedIn = checkedIn;
     }
 
     public String getUsername() {

@@ -1,4 +1,4 @@
-package za.co.wethinkcode.dms.absenteeismFeatureTests;
+package za.co.wethinkcode.dms.absenteeismFeatureTests.modelTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CheckOutRepositoryTests {
+public class CheckOutTests {
 
     @Test
     @DisplayName("A normal checkout")

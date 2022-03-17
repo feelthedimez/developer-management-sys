@@ -1,13 +1,26 @@
 ----------------------------------------------------------------
-Tue Mar 15 18:06:31 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-8e54-b6b4-0000055d5120 
-on database directory memory:/home/tebogo/developer-management-sys/dms/0c83ef4a-5a3b-45ea-8263-0c4a2f8f7a0b with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6a6824be 
-Loaded from file:/home/tebogo/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Azul Systems, Inc.
-java.runtime.version=11.0.14+9-LTS
-user.dir=/home/tebogo/developer-management-sys/dms
+Thu Mar 17 06:38:39 SAST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-962b-aacb-000004af7b08 
+on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/f1e3570f-835c-485b-8a1f-edcb59727548 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
+Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Ubuntu
+java.runtime.version=11.0.11+9-Ubuntu-0ubuntu2.18.04
+user.dir=/home/dime/FinalProject/developer-management-sys/dms
 os.name=Linux
 os.arch=amd64
-os.version=5.4.0-74-generic
+os.version=5.0.0-32-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Mar 17 06:38:52 SAST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 109f00b9-017f-962b-aacb-000004af7b08 
+on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/a3d13516-9a99-448c-8df1-9763245a9b36 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
+Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Ubuntu
+java.runtime.version=11.0.11+9-Ubuntu-0ubuntu2.18.04
+user.dir=/home/dime/FinalProject/developer-management-sys/dms
+os.name=Linux
+os.arch=amd64
+os.version=5.0.0-32-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
