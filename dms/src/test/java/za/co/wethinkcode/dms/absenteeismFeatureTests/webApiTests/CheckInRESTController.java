@@ -43,6 +43,17 @@ public class CheckInRESTController {
                 .andExpect(status().isCreated());
     }
 
+    @Test
+    void emptyBodyCheckInApiPOSTTest() throws Exception {
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/avail/checkin")
+                                .content("")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 
     public static String asJsonString(final Map<String, String> obj) {
         try {
