@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Mar 17 06:38:39 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-962b-aacb-000004af7b08 
-on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/f1e3570f-835c-485b-8a1f-edcb59727548 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
+Thu Mar 17 22:12:06 SAST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-9980-6de5-00000831ebb8 
+on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/a399b67d-b875-4f8e-bb9b-6d0945efb5d9 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
 Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Ubuntu
 java.runtime.version=11.0.11+9-Ubuntu-0ubuntu2.18.04
@@ -10,17 +10,3 @@ os.name=Linux
 os.arch=amd64
 os.version=5.0.0-32-generic
 derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Thu Mar 17 06:38:52 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 109f00b9-017f-962b-aacb-000004af7b08 
-on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/a3d13516-9a99-448c-8df1-9763245a9b36 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@55054057 
-Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Ubuntu
-java.runtime.version=11.0.11+9-Ubuntu-0ubuntu2.18.04
-user.dir=/home/dime/FinalProject/developer-management-sys/dms
-os.name=Linux
-os.arch=amd64
-os.version=5.0.0-32-generic
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
