@@ -1,10 +1,11 @@
-package za.co.wethinkcode.dms.absenteeismFeature.services;
+package za.co.wethinkcode.dms.checkInAndOutSystem.services;
 
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.co.wethinkcode.dms.absenteeismFeature.entities.CheckInEntity;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckIn;
-import za.co.wethinkcode.dms.absenteeismFeature.repository.CheckInRepository;
+import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
+import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorWithDataException;
+import za.co.wethinkcode.dms.checkInAndOutSystem.repository.CheckInRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,8 +22,15 @@ public class CheckInService {
     }
 
     public void addACheckIn(String username,LocalTime time, LocalDate date) {
-        CheckInEntity checkIn = new CheckInEntity(username, time, date);
-        checkInRepository.save(checkIn);
+
+        CheckInEntity checkInEntity;
+        try {
+            checkInEntity = new CheckInEntity(username, time, date);
+        } catch (Exception e) {
+            throw new CustomErrorWithDataException(e.getMessage());
+        }
+
+        checkInRepository.save(checkInEntity);
     }
 
     public Optional<CheckInEntity> getCheckInDataByDate(LocalDate date) {

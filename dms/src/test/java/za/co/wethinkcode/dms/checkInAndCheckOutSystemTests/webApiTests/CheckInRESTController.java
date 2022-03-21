@@ -1,4 +1,4 @@
-package za.co.wethinkcode.dms.absenteeismFeatureTests.webApiTests;
+package za.co.wethinkcode.dms.checkInAndCheckOutSystemTests.webApiTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -9,10 +9,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckIn;
-import za.co.wethinkcode.dms.absenteeismFeature.services.CheckInService;
+import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
+import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
@@ -52,6 +55,24 @@ public class CheckInRESTController {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void retrieveDataByDateGETTest() throws Exception {
+        CheckInEntity checkInEntity = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
+        when(service.getCheckInDataByDate(LocalDate.parse("2022-03-13"))).thenReturn(java.util.Optional.of(checkInEntity));
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/avail/checkin/tetema/2022-03-13")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(asJsonString(Map.of(
+                        "username", "tetema",
+                        "date", "2022-03-13",
+                        "time", "08:30:00"
+                ))));
     }
 
 

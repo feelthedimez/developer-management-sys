@@ -1,4 +1,4 @@
-package za.co.wethinkcode.dms.absenteeismFeature.model;
+package za.co.wethinkcode.dms.checkInAndOutSystem.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,9 +1,7 @@
-package za.co.wethinkcode.dms.absenteeismFeature.model;
+package za.co.wethinkcode.dms.checkInAndOutSystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

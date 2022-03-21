@@ -1,8 +1,8 @@
-package za.co.wethinkcode.dms.absenteeismFeatureTests.modelTests;
+package za.co.wethinkcode.dms.checkInAndCheckOutSystemTests.modelTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.dms.absenteeismFeature.reponses.ApiSuccessResponse;
+import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.ApiSuccessResponse;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

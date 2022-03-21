@@ -1,9 +1,8 @@
-package za.co.wethinkcode.dms.absenteeismFeatureTests.modelTests;
+package za.co.wethinkcode.dms.checkInAndCheckOutSystemTests.modelTests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckIn;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckOut;
+import za.co.wethinkcode.dms.checkInAndOutSystem.model.CheckOut;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

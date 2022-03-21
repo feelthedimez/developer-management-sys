@@ -1,9 +1,7 @@
-package za.co.wethinkcode.dms.absenteeismFeature.repository;
+package za.co.wethinkcode.dms.checkInAndOutSystem.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import za.co.wethinkcode.dms.absenteeismFeature.entities.CheckInEntity;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckIn;
-import za.co.wethinkcode.dms.absenteeismFeature.model.CheckOut;
+import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 
 import java.time.LocalDate;
 import java.util.List;
