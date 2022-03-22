@@ -14,6 +14,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/avail")
@@ -39,10 +40,12 @@ public class CheckInController {
     }
 
     @GetMapping("checkin/{username}/{date}")
-    ResponseEntity<CheckInEntity> getCheckInByDate(@PathVariable String date) {
+    ResponseEntity<CheckInEntity> getCheckInByDate(
+            @PathVariable String date,
+            @PathVariable String username
+    ) {
 
         LocalDate actualDate;
-
         try {
             actualDate = LocalDate.parse(date);
         } catch (DateTimeException e) {
@@ -52,10 +55,29 @@ public class CheckInController {
             );
         }
 
-        return new ResponseEntity<>(
-                checkInService.getCheckInDataByDate(actualDate).get(),
-                HttpStatus.OK
-        );
+        String finalUsername;
+        try {
+            finalUsername = username;
+        } catch (NullPointerException e) {
+            throw new CustomErrorResponse(
+                    "Provide a username",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
+        Optional<CheckInEntity> checkInEntityData = checkInService
+                .getCheckInDataByDateAndUserName(actualDate, finalUsername);
+
+        if(checkInEntityData.isEmpty()) {
+            throw new CustomErrorResponse(
+                    "Check in data not found",
+                    HttpStatus.NOT_FOUND
+            );
+        }
+
+        return new ResponseEntity<>(checkInEntityData.get(), HttpStatus.OK);
+
+
     }
 
     @GetMapping("checkin/{username}")

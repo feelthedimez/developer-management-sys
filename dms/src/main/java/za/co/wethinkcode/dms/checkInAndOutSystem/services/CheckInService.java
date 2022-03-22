@@ -33,8 +33,8 @@ public class CheckInService {
         checkInRepository.save(checkInEntity);
     }
 
-    public Optional<CheckInEntity> getCheckInDataByDate(LocalDate date) {
-        return checkInRepository.findCheckInEntityByDate(date);
+    public Optional<CheckInEntity> getCheckInDataByDateAndUserName(LocalDate date, String username) {
+        return checkInRepository.findCheckInEntityByDateAndUsername(date, username);
     }
 
     public List<CheckInEntity> getAllCheckInDataByUserName(String username) {

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface CheckInRepository extends JpaRepository<CheckInEntity, String> {
 
-    Optional<CheckInEntity> findCheckInEntityByDate(LocalDate date);
+    Optional<CheckInEntity> findCheckInEntityByDateAndUsername(LocalDate date, String username);
 
     List<CheckInEntity> getCheckInEntityByUsername(String username);
 }

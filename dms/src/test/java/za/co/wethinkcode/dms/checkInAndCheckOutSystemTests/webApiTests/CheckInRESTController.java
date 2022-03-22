@@ -1,6 +1,7 @@
 package za.co.wethinkcode.dms.checkInAndCheckOutSystemTests.webApiTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,6 +36,7 @@ public class CheckInRESTController {
     private CheckInService service;
 
     @Test
+    @DisplayName("POST /avail/checkin - Normal post endpoint")
     void normalCheckInApiPOSTTest() throws Exception {
         this.mockMvc.perform(
                 MockMvcRequestBuilders
@@ -47,6 +49,7 @@ public class CheckInRESTController {
     }
 
     @Test
+    @DisplayName("POST /avail/checkin - No body with the post-request")
     void emptyBodyCheckInApiPOSTTest() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
@@ -58,9 +61,10 @@ public class CheckInRESTController {
     }
 
     @Test
+    @DisplayName("GET /avail/checkin/{username}/{date} - Normal GET request")
     void retrieveDataByDateGETTest() throws Exception {
         CheckInEntity checkInEntity = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
-        when(service.getCheckInDataByDate(LocalDate.parse("2022-03-13"))).thenReturn(java.util.Optional.of(checkInEntity));
+        when(service.getCheckInDataByDateAndUserName(LocalDate.parse("2022-03-13"), "tetema")).thenReturn(java.util.Optional.of(checkInEntity));
 
         this.mockMvc.perform(
                 MockMvcRequestBuilders
@@ -73,6 +77,22 @@ public class CheckInRESTController {
                         "date", "2022-03-13",
                         "time", "08:30:00"
                 ))));
+    }
+
+    @Test
+    @DisplayName("GET /avail/checkin/{username}/{date} - With invalid date format")
+    void getInvalidDateFormatWhenGETByDateTest() throws Exception {
+
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/avail/checkin/tetema/2022-03-32")
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(asJsonString(Map.of(
+                        "message", "Incorrect date format"
+                ))));
+
     }
 
 
