@@ -1,6 +1,5 @@
 package za.co.wethinkcode.dms.checkInAndOutSystem.services;
 
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
@@ -21,7 +20,7 @@ public class CheckInService {
         this.checkInRepository = checkInRepository;
     }
 
-    public CheckInEntity addACheckIn(String username,LocalTime time, LocalDate date) {
+    public void addACheckIn(String username, LocalTime time, LocalDate date) {
 
         CheckInEntity checkInEntity;
         try {
@@ -30,7 +29,7 @@ public class CheckInService {
             throw new CustomErrorWithDataException(e.getMessage());
         }
 
-        return checkInRepository.save(checkInEntity);
+        checkInRepository.save(checkInEntity);
     }
 
     public Optional<CheckInEntity> getCheckInDataByDateAndUserName(LocalDate date, String username) {

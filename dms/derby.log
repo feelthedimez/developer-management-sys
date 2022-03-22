@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Tue Mar 22 04:54:16 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-af8b-e6e1-000001c878e8 
-on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/10e91f73-79d8-403c-b45b-ed22a5cd2951 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+Tue Mar 22 20:51:21 SAST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017f-b2f8-21e1-00000137d450 
+on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/4d9a4c8a-dec4-4530-aa5c-aed67ab217c0 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
 Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=16.0.1+9-24
@@ -12,22 +12,9 @@ os.version=5.0.0-32-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Tue Mar 22 04:54:26 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 13a100c9-017f-af8b-e6e1-000001c878e8 
-on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/67b2248a-b478-4f9e-99fe-f91c0b13120c with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
-Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=16.0.1+9-24
-user.dir=/home/dime/FinalProject/developer-management-sys/dms
-os.name=Linux
-os.arch=amd64
-os.version=5.0.0-32-generic
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Mar 22 04:54:30 SAST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 21518184-017f-af8b-e6e1-000001c878e8 
-on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/caf08cab-dc36-496f-9abf-9303c7da32fe with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+Tue Mar 22 20:51:54 SAST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 13a100c9-017f-b2f8-21e1-00000137d450 
+on database directory memory:/home/dime/FinalProject/developer-management-sys/dms/0a114723-c9a7-415c-bd40-37197f1bfc82 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
 Loaded from file:/home/dime/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=16.0.1+9-24

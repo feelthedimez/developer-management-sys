@@ -61,28 +61,6 @@ public class CheckInRESTControllerTests {
     }
 
     @Test
-    @DisplayName("POST /avail/checkin - Posting twice to receive an error")
-    void postTwiceTest() throws Exception {
-        this.mockMvc.perform(
-                        MockMvcRequestBuilders
-                                .post("/avail/checkin")
-                                .content(asJsonString(Map.of("username", "tetema", "date", "2022-03-13", "time", "09:30")))
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString("Check In Successful")))
-                .andExpect(status().isCreated())
-                .andDo(result ->  this.mockMvc.perform(
-                        MockMvcRequestBuilders
-                                .post("/avail/checkout")
-                                .content(asJsonString(Map.of("username", "tetema", "date", "2022-03-13", "time", "09:30")))
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                        .andExpect(content().json(asJsonString(Map.of("message", "Never checked in..."))))
-                        .andExpect(status().isBadRequest())
-                );
-    }
-
-    @Test
     @DisplayName("GET /avail/checkin/{username}/{date} - Normal GET request")
     void retrieveDataByDateGETTest() throws Exception {
         CheckInEntity checkInEntity = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
