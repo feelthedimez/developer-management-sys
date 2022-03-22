@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.DateTimeException;
-
 @ControllerAdvice
 public class ExceptionAdviceController {
 
@@ -16,9 +14,9 @@ public class ExceptionAdviceController {
         return new ResponseEntity<>(new ErrorResponse(status, e.getMessage()), status);
     }
 
-    @ExceptionHandler(CustomErrorResponse.class)
+    @ExceptionHandler(CustomErrorResponseException.class)
     public ResponseEntity<ErrorResponse> handleCustomErrorExceptions(Exception e) {
-        CustomErrorResponse customErrorException = (CustomErrorResponse) e;
+        CustomErrorResponseException customErrorException = (CustomErrorResponseException) e;
         HttpStatus httpStatus = customErrorException.getHttpStatus();
 
         return new ResponseEntity<>(new ErrorResponse(httpStatus, e.getMessage()), httpStatus);

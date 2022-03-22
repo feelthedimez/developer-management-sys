@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
-import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorResponse;
-import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorWithDataException;
+import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorResponseException;
 import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.ApiSuccessResponse;
 import za.co.wethinkcode.dms.checkInAndOutSystem.model.CheckIn;
 import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
@@ -30,7 +29,7 @@ public class CheckInController {
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
 
         if(checkInService.doesDateAndUsernameExist(checkIn.getDate(), checkIn.getUsername()))
-            throw new CustomErrorResponse("Already checked in", HttpStatus.BAD_REQUEST);
+            throw new CustomErrorResponseException("Already checked in", HttpStatus.BAD_REQUEST);
 
         checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
 
@@ -52,12 +51,12 @@ public class CheckInController {
             finalUsername = username;
             actualDate = LocalDate.parse(date);
         } catch (NullPointerException e) {
-            throw new CustomErrorResponse(
+            throw new CustomErrorResponseException(
                     "Provide a username",
                     HttpStatus.BAD_REQUEST
             );
         } catch (DateTimeException e) {
-            throw new CustomErrorResponse(
+            throw new CustomErrorResponseException(
                     "Incorrect date format",
                     HttpStatus.BAD_REQUEST
             );
@@ -67,7 +66,7 @@ public class CheckInController {
                 .getCheckInDataByDateAndUserName(actualDate, finalUsername);
 
         if(checkInEntityData.isEmpty())
-            throw new CustomErrorResponse("Check in data not found", HttpStatus.NOT_FOUND);
+            throw new CustomErrorResponseException("Check in data not found", HttpStatus.NOT_FOUND);
 
         return  new ResponseEntity<>(checkInEntityData.get(), HttpStatus.OK);
     }
