@@ -21,7 +21,7 @@ public class CheckInService {
         this.checkInRepository = checkInRepository;
     }
 
-    public void addACheckIn(String username,LocalTime time, LocalDate date) {
+    public CheckInEntity addACheckIn(String username,LocalTime time, LocalDate date) {
 
         CheckInEntity checkInEntity;
         try {
@@ -30,7 +30,7 @@ public class CheckInService {
             throw new CustomErrorWithDataException(e.getMessage());
         }
 
-        checkInRepository.save(checkInEntity);
+        return checkInRepository.save(checkInEntity);
     }
 
     public Optional<CheckInEntity> getCheckInDataByDateAndUserName(LocalDate date, String username) {
@@ -38,7 +38,11 @@ public class CheckInService {
     }
 
     public List<CheckInEntity> getAllCheckInDataByUserName(String username) {
-        return checkInRepository.getCheckInEntityByUsername(username);
+        return checkInRepository.findCheckInEntitiesByUsername(username);
+    }
+
+    public boolean doesDateAndUsernameExist(LocalDate date, String username) {
+        return checkInRepository.existsCheckInEntityByDateAndUsername(date, username);
     }
 
 }

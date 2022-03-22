@@ -29,14 +29,19 @@ public class CheckInController {
     @PostMapping("/checkin")
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
 
-        try {
-            checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
-            return new ResponseEntity<>(
-                    new ApiSuccessResponse(201, "Check In Successful"), HttpStatus.CREATED
+        if(checkInService.doesDateAndUsernameExist(checkIn.getDate(), checkIn.getUsername())) {
+            throw new CustomErrorResponse(
+                    "Already checked in",
+                    HttpStatus.BAD_REQUEST
             );
-        } catch (NullPointerException e) {
-            throw new CustomErrorWithDataException(e.getMessage());
         }
+
+        checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
+
+        return new ResponseEntity<>(
+                new ApiSuccessResponse(201, "Check In Successful"),
+                HttpStatus.CREATED
+        );
     }
 
     @GetMapping("checkin/{username}/{date}")
@@ -45,22 +50,19 @@ public class CheckInController {
             @PathVariable String username
     ) {
 
+        String finalUsername;
         LocalDate actualDate;
         try {
-            actualDate = LocalDate.parse(date);
-        } catch (DateTimeException e) {
-            throw new CustomErrorResponse(
-                    "Incorrect date format",
-                    HttpStatus.BAD_REQUEST
-            );
-        }
-
-        String finalUsername;
-        try {
             finalUsername = username;
+            actualDate = LocalDate.parse(date);
         } catch (NullPointerException e) {
             throw new CustomErrorResponse(
                     "Provide a username",
+                    HttpStatus.BAD_REQUEST
+            );
+        } catch (DateTimeException e) {
+            throw new CustomErrorResponse(
+                    "Incorrect date format",
                     HttpStatus.BAD_REQUEST
             );
         }
@@ -75,9 +77,7 @@ public class CheckInController {
             );
         }
 
-        return new ResponseEntity<>(checkInEntityData.get(), HttpStatus.OK);
-
-
+        return  new ResponseEntity<>(checkInEntityData.get(), HttpStatus.OK);
     }
 
     @GetMapping("checkin/{username}")

@@ -1,23 +1,21 @@
 package za.co.wethinkcode.dms.checkInAndOutSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
 public class CheckOut implements Checks {
-    @Id
-    @Column(nullable = false)
+
     private String username;
-    @Column(nullable = false)
     private LocalDate date;
-    @Column(nullable = false)
     private LocalTime time;
-    @Column(nullable = false)
+    @JsonIgnore
     private boolean checkedOutLate;
-    @Column(nullable = false)
+    @JsonIgnore
     private boolean isCheckedOut;
 
     public CheckOut() {}
