@@ -29,12 +29,8 @@ public class CheckInController {
     @PostMapping("/checkin")
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
 
-        if(checkInService.doesDateAndUsernameExist(checkIn.getDate(), checkIn.getUsername())) {
-            throw new CustomErrorResponse(
-                    "Already checked in",
-                    HttpStatus.BAD_REQUEST
-            );
-        }
+        if(checkInService.doesDateAndUsernameExist(checkIn.getDate(), checkIn.getUsername()))
+            throw new CustomErrorResponse("Already checked in", HttpStatus.BAD_REQUEST);
 
         checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
 
@@ -70,19 +66,15 @@ public class CheckInController {
         Optional<CheckInEntity> checkInEntityData = checkInService
                 .getCheckInDataByDateAndUserName(actualDate, finalUsername);
 
-        if(checkInEntityData.isEmpty()) {
-            throw new CustomErrorResponse(
-                    "Check in data not found",
-                    HttpStatus.NOT_FOUND
-            );
-        }
+        if(checkInEntityData.isEmpty())
+            throw new CustomErrorResponse("Check in data not found", HttpStatus.NOT_FOUND);
 
         return  new ResponseEntity<>(checkInEntityData.get(), HttpStatus.OK);
     }
 
     @GetMapping("checkin/{username}")
-    List<CheckInEntity> getAllCheckInsByUsername(@PathVariable String username) {
-        return checkInService.getAllCheckInDataByUserName(username);
+    ResponseEntity<List<CheckInEntity>> getAllCheckInsByUsername(@PathVariable String username) {
+        return new ResponseEntity<>(checkInService.getAllCheckInDataByUserName(username), HttpStatus.OK);
     }
 
 }
