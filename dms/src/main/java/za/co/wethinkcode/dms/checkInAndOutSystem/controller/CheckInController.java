@@ -53,7 +53,8 @@ public class CheckInController {
     }
 
     @GetMapping("checkin/{username}")
-    ResponseEntity<List<CheckInEntity>> getAllCheckInsByUsername(@PathVariable String username) {
+    ResponseEntity<?> getAllCheckInsByUsername(@PathVariable String username) {
+
         return new ResponseEntity<>(checkInService.getAllCheckInDataByUserName(username), HttpStatus.OK);
     }
 
