@@ -8,8 +8,8 @@ jobs:
     env:
       working-directory: ./dms
       DB_DATABASE: dms_db
-      DB_USER: root
-      DB_PASSWORD: root
+      DB_USER: admin
+      DB_PASSWORD: 'MansGotSQL-_-'
     
     steps:
       - uses: actions/checkout@v2  
@@ -20,7 +20,9 @@ jobs:
           distribution: 'adopt'
       
       - name: Setup MySQL
-        run: mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
       
 #       - name: Building & Testing with Maven
 #         run: mvn test
