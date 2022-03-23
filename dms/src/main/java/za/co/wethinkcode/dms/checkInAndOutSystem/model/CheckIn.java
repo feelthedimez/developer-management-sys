@@ -25,12 +25,24 @@ public class CheckIn implements Checks {
         return new CheckIn(username, time, date, time.isAfter(LocalTime.parse("10:30")), true);
     }
 
+    public static CheckIn createCheckInFromEntity(CheckInEntity checkInEntity) {
+        return new CheckIn(checkInEntity);
+    }
+
     private CheckIn( String username, LocalTime time, LocalDate date, boolean isLate, boolean isCheckedIn) {
         this.username = username;
         this.time = time;
         this.date = date;
         this.isUserLate = isLate;
         this.isUserCheckedIn = isCheckedIn;
+    }
+
+    private CheckIn(CheckInEntity checkIn) {
+        this.username = checkIn.getUsername();
+        this.date = checkIn.getDate();
+        this.time = checkIn.getTime();
+        this.isUserCheckedIn = true;
+        this.isUserLate = time.isAfter(LocalTime.parse("10:30"));
     }
 
 }

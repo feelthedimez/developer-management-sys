@@ -14,8 +14,7 @@ public class ErrorResponse {
     private int code;
     private String status;
     private String message;
-//    private String stackStrace;
-//    private Object data;
+    private String stackStrace;
 
 
     public ErrorResponse() {
@@ -29,13 +28,9 @@ public class ErrorResponse {
         this.status = status.name();
     }
 
-//    public ErrorResponse(HttpStatus status, String message, String stackStrace) {
-//        this(status, message);
-//        this.stackStrace = stackStrace;
-//    }
-//
-//    public ErrorResponse(HttpStatus status, String message, String stackStrace, Object data) {
-//        this(status, message, stackStrace);
-//        this.data = data;
-//    }
+    public ErrorResponse(HttpStatus status, String message, String stackStrace) {
+        this(status, message);
+        this.stackStrace = stackStrace;
+    }
+
 }

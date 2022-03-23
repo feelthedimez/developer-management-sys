@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.time.DateTimeException;
+
 @ControllerAdvice
 public class ExceptionAdviceController {
 
@@ -19,6 +23,23 @@ public class ExceptionAdviceController {
         CustomErrorResponseException customErrorException = (CustomErrorResponseException) e;
         HttpStatus httpStatus = customErrorException.getHttpStatus();
 
-        return new ResponseEntity<>(new ErrorResponse(httpStatus, e.getMessage()), httpStatus);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        String stackTrace = stringWriter.toString();
+
+        return new ResponseEntity<>(new ErrorResponse(httpStatus, e.getMessage(), stackTrace), httpStatus);
+    }
+
+    @ExceptionHandler(DateErrorException.class)
+    public ResponseEntity<ErrorResponse> handleDateErrorExceptions(DateTimeException e) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        String stackTrace = stringWriter.toString();
+
+        return new ResponseEntity<>(new ErrorResponse(status, e.getMessage(), stackTrace), status);
     }
 }

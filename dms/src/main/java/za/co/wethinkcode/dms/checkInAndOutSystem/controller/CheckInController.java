@@ -8,6 +8,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorResponseException;
 import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.ApiSuccessResponse;
 import za.co.wethinkcode.dms.checkInAndOutSystem.model.CheckIn;
+import za.co.wethinkcode.dms.checkInAndOutSystem.model.Checks;
 import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 
 import java.time.DateTimeException;
@@ -40,10 +41,7 @@ public class CheckInController {
     }
 
     @GetMapping("checkin/{username}/{date}")
-    ResponseEntity<?> getCheckInByDate(
-            @PathVariable String date,
-            @PathVariable String username
-    ) {
+    ResponseEntity<Checks> getCheckInByDate(@PathVariable String date, @PathVariable String username) {
 
         Optional<CheckInEntity> checkInEntityData = checkInService
                 .getCheckInDataByDateAndUserName(actualDate(date), userName(username));
@@ -51,12 +49,7 @@ public class CheckInController {
         if(checkInEntityData.isEmpty())
             throw new CustomErrorResponseException("Check in data not found", HttpStatus.NOT_FOUND);
 
-        return  new ResponseEntity<>(CheckIn.createCheckIn(
-                checkInEntityData.get().getUsername(),
-                checkInEntityData.get().getTime(),
-                checkInEntityData.get().getDate()
-        ), HttpStatus.OK);
-
+        return new ResponseEntity<>(CheckIn.createCheckInFromEntity(checkInEntityData.get()), HttpStatus.OK);
     }
 
     @GetMapping("checkin/{username}")
