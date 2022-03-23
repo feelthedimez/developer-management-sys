@@ -53,7 +53,7 @@ public class CheckInRESTControllerTests {
     @Test
     @DisplayName("POST /avail/checkin - Check in twice")
     void checkIfUserChecksInTwice() {
-
+        // I have to find out how to post twice using MockMVC to test for the logic
     }
 
     @Test
