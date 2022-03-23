@@ -8,7 +8,7 @@ jobs:
     env:
       working-directory: ./dms
       DB_DATABASE: dms_db
-      DB_USER: admin@localhost
+      DB_USER: admin
       DB_PASSWORD: MansGotSQL-_-
     
     steps:
