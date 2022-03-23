@@ -10,10 +10,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+@Getter @Setter @ToString @NoArgsConstructor
 public class CheckIn implements Checks {
     private String username;
     private LocalDate date;
@@ -25,7 +22,7 @@ public class CheckIn implements Checks {
         return new CheckIn(username, time, date, time.isAfter(LocalTime.parse("10:30")), true);
     }
 
-    public static CheckIn createCheckInFromEntity(CheckInEntity checkInEntity) {
+    public static CheckIn createCheckIn(CheckInEntity checkInEntity) {
         return new CheckIn(checkInEntity);
     }
 

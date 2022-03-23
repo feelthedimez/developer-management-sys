@@ -17,6 +17,8 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
@@ -49,6 +51,12 @@ public class CheckInRESTControllerTests {
     }
 
     @Test
+    @DisplayName("POST /avail/checkin - Check in twice")
+    void checkIfUserChecksInTwice() {
+
+    }
+
+    @Test
     @DisplayName("POST /avail/checkin - No body with the post-request")
     void emptyBodyCheckInApiPOSTTest() throws Exception {
         this.mockMvc.perform(
@@ -75,7 +83,9 @@ public class CheckInRESTControllerTests {
                 .andExpect(content().json(asJsonString(Map.of(
                         "username", "tetema",
                         "date", "2022-03-13",
-                        "time", "08:30:00"
+                        "time", "08:30:00",
+                        "userLate", false,
+                        "userCheckedIn", true
                 ))));
     }
 
@@ -96,11 +106,40 @@ public class CheckInRESTControllerTests {
     }
 
 
-    public static String asJsonString(final Map<String, String> obj) {
+    @Test
+    @DisplayName("GET /checkin/all/ - Get every checkin data in the database")
+    void getAllCheckInDataTest() throws Exception {
+        CheckInEntity checkInEntity1 = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
+        CheckInEntity checkInEntity2 = new CheckInEntity("justin", LocalTime.parse("08:32"), LocalDate.parse("2022-03-13"));
+        when(service.getAllCheckIn()).thenReturn(new ArrayList<>(Arrays.asList(checkInEntity1, checkInEntity2)));
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get("/avail/checkin/all")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    @DisplayName("GET /checkin/all/ - Get every checkin data in the database, it should be empty")
+    void getAnEmptyListAllCheckInDataTest() throws Exception {
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/avail/checkin/all")
+                                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(containsString("[]")));
+    }
+
+
+    public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 }

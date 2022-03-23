@@ -13,5 +13,7 @@ public interface CheckInRepository extends JpaRepository<CheckInEntity, String> 
 
     List<CheckInEntity> findCheckInEntitiesByUsername(String username);
 
+    List<CheckInEntity> findCheckInEntitiesByDate(LocalDate date);
+
     boolean existsCheckInEntityByDateAndUsername(LocalDate date, String username);
 }

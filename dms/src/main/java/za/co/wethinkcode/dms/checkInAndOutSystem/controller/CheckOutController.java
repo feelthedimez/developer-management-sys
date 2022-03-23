@@ -8,6 +8,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckOutEntity;
 import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.ApiSuccessResponse;
 import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.CustomErrorResponseException;
 import za.co.wethinkcode.dms.checkInAndOutSystem.model.CheckOut;
+import za.co.wethinkcode.dms.checkInAndOutSystem.model.Checks;
 import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckOutService;
 
@@ -36,17 +37,12 @@ public class CheckOutController {
         LocalTime time = checkOut.getTime();
         String username = checkOut.getUsername();
 
-        if (!checkInService.doesDateAndUsernameExist(date, username)) {
-            throw new CustomErrorResponseException(
-                    "Never checked in...",
-                    HttpStatus.BAD_REQUEST
-            );
-        } else if (checkOutService.doesDateAndUsernameExist(date, username)) {
-            throw new CustomErrorResponseException(
-                    "Already checked out",
-                    HttpStatus.BAD_REQUEST
-            );
-        }
+        if (!checkInService.doesDateAndUsernameExist(date, username))
+            throw new CustomErrorResponseException("Never checked in...", HttpStatus.BAD_REQUEST);
+
+         else if (checkOutService.doesDateAndUsernameExist(date, username))
+            throw new CustomErrorResponseException("Already checked out", HttpStatus.BAD_REQUEST);
+
 
         checkOutService.addCheckOut(username, time, date);
 
@@ -57,40 +53,42 @@ public class CheckOutController {
     }
 
     @GetMapping("checkout/{username}/{date}")
-    ResponseEntity<CheckOutEntity> getCheckOutByDate(
+    ResponseEntity<Checks> getCheckOutByDate(
                 @PathVariable String date,
                 @PathVariable String username
         ) {
 
-            String finalUsername;
-            LocalDate actualDate;
-            try {
-                finalUsername = username;
-                actualDate = LocalDate.parse(date);
-            } catch (NullPointerException e) {
-                throw new CustomErrorResponseException(
-                        "Provide a username",
-                        HttpStatus.BAD_REQUEST
-                );
-            } catch (DateTimeException e) {
-                throw new CustomErrorResponseException(
-                        "Incorrect date format",
-                        HttpStatus.BAD_REQUEST
-                );
-            }
 
         Optional<CheckOutEntity> checkOutEntity = checkOutService
-                .getCheckOutDataByDateAndUserName(actualDate, finalUsername);
+                .getCheckOutDataByDateAndUserName(actualDate(date), userName(username));
 
-        if(checkOutEntity.isEmpty()) {
+        if(checkOutEntity.isEmpty())
+            throw new CustomErrorResponseException("Check out data not found", HttpStatus.NOT_FOUND);
+
+        return  new ResponseEntity<>(CheckOut.createCheckOut(checkOutEntity.get()), HttpStatus.OK);
+
+    }
+
+    private static String userName(String username) {
+        try {
+            return username;
+        } catch (NullPointerException e) {
             throw new CustomErrorResponseException(
-                    "Check out data not found",
-                    HttpStatus.NOT_FOUND
+                    "Provide a username",
+                    HttpStatus.BAD_REQUEST
             );
         }
+    }
 
-        return  new ResponseEntity<>(checkOutEntity.get(), HttpStatus.OK);
-
+    private static LocalDate actualDate(String date) {
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeException e) {
+            throw new CustomErrorResponseException(
+                    "Incorrect date format",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
     }
 
 }

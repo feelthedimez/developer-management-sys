@@ -3,6 +3,7 @@ package za.co.wethinkcode.dms.checkInAndOutSystem.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity @Table(name = "check_in")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class CheckInEntity {
     @Id
     @Column(name="checkin_id", updatable = false, nullable = false)
@@ -20,7 +21,7 @@ public class CheckInEntity {
     private String username;
     @Column(name="check_in_time" , nullable = false, updatable = false)
     private LocalTime time;
-    @Column(name="check_in_date", nullable = false, unique = true, updatable = false)
+    @Column(name="check_in_date", nullable = false, updatable = false)
     private LocalDate date;
 
     public CheckInEntity(String username, LocalTime time, LocalDate date) {

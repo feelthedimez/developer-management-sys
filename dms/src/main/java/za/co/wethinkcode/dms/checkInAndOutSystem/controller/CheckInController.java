@@ -13,6 +13,8 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +31,14 @@ public class CheckInController {
     @PostMapping("/checkin")
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
 
-        if(checkInService.doesDateAndUsernameExist(checkIn.getDate(), checkIn.getUsername()))
+        LocalDate date = checkIn.getDate();
+        LocalTime time = checkIn.getTime();
+        String username = checkIn.getUsername();
+
+        if(checkInService.doesDateAndUsernameExist(date, username))
             throw new CustomErrorResponseException("Already checked in", HttpStatus.BAD_REQUEST);
 
-        checkInService.addACheckIn(checkIn.getUsername(), checkIn.getTime(), checkIn.getDate());
+        checkInService.addACheckIn(username, time, date);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check In Successful"),
@@ -49,14 +55,14 @@ public class CheckInController {
         if(checkInEntityData.isEmpty())
             throw new CustomErrorResponseException("Check in data not found", HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(CheckIn.createCheckInFromEntity(checkInEntityData.get()), HttpStatus.OK);
+        return new ResponseEntity<>(CheckIn.createCheckIn(checkInEntityData.get()), HttpStatus.OK);
     }
 
-    @GetMapping("checkin/{username}")
-    ResponseEntity<?> getAllCheckInsByUsername(@PathVariable String username) {
-
-        return new ResponseEntity<>(checkInService.getAllCheckInDataByUserName(username), HttpStatus.OK);
+    @GetMapping("/checkin/all")
+    ResponseEntity<?> getEveryCheckInData() {
+        return new ResponseEntity<>(modelToCheckIn(checkInService.getAllCheckIn()), HttpStatus.OK);
     }
+
 
     private static String userName(String username) {
         try {
@@ -78,6 +84,16 @@ public class CheckInController {
                     HttpStatus.BAD_REQUEST
             );
         }
+    }
+
+    private static List<CheckIn> modelToCheckIn(List<CheckInEntity> checkInEntities) {
+        List<CheckIn> finalCheckInData = new ArrayList<>();
+
+        for (CheckInEntity checkInEntity : checkInEntities) {
+            finalCheckInData.add(CheckIn.createCheckIn(checkInEntity));
+        }
+
+        return finalCheckInData;
     }
 
 }

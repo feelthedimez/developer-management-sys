@@ -20,9 +20,9 @@ public class CheckOutEntity {
     private UUID id;
     @Column(name="username" ,nullable = false)
     private String username;
-    @Column(name="check_out_time" , nullable = false, unique = true)
+    @Column(name="check_out_time" , nullable = false)
     private LocalTime time;
-    @Column(name="check_out_date", nullable = false, unique = true)
+    @Column(name="check_out_date", nullable = false)
     private LocalDate date;
 
     public CheckOutEntity(String username, LocalTime time, LocalDate date) {

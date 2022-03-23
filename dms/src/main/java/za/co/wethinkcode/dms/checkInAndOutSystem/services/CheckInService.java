@@ -44,4 +44,12 @@ public class CheckInService {
         return checkInRepository.existsCheckInEntityByDateAndUsername(date, username);
     }
 
+    public List<CheckInEntity> getAllCheckInDataByDate(LocalDate date) {
+        return checkInRepository.findCheckInEntitiesByDate(date);
+    }
+
+    public List<CheckInEntity> getAllCheckIn() {
+        return checkInRepository.findAll();
+    }
+
 }
