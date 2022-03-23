@@ -22,7 +22,7 @@ jobs:
       - name: Setup MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -host 127.0.0.1 --port 8888 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -h 127.0.0.1 --port 8888 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
       
 #       - name: Building & Testing with Maven
 #         run: mvn test
