@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,9 +18,7 @@ public class CheckIn implements Checks {
     private String username;
     private LocalDate date;
     private LocalTime time;
-    @JsonIgnore
     private boolean isUserLate;
-    @JsonIgnore
     private boolean isUserCheckedIn;
 
     public static CheckIn createCheckIn(String username, LocalTime time, LocalDate date){
