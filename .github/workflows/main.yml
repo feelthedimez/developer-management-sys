@@ -21,7 +21,7 @@ jobs:
       
       - name: Setup MySQL
         run: |
-          mysql -h 127.0.0.1 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -h 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
       
 #       - name: Building & Testing with Maven
 #         run: mvn test
