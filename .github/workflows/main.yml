@@ -22,6 +22,7 @@ jobs:
       - name: Setup MySQL
         run: |
           sudo /etc/init.d/mysql start
+          show tables
       
 #       - name: Building & Testing with Maven
 #         run: mvn test
