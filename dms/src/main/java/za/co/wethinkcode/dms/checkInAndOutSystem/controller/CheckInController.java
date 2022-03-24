@@ -17,7 +17,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 @RestController
-@RequestMapping("/avail")
+@RequestMapping("/avail/checkin")
 public class CheckInController {
 
     private final CheckInService checkInService;
@@ -26,7 +26,7 @@ public class CheckInController {
         this.checkInService = checkInService;
     }
 
-    @PostMapping("/checkin")
+    @PostMapping
     ResponseEntity<?> createCheckin(@RequestBody CheckIn checkIn) {
 
         LocalDate date = checkIn.getDate();
@@ -44,7 +44,7 @@ public class CheckInController {
         );
     }
 
-    @GetMapping("checkin/{username}/{date}")
+    @GetMapping("/{username}/{date}")
     ResponseEntity<Checks> getCheckInByDate(@PathVariable String date, @PathVariable String username) {
 
         Optional<CheckInEntity> checkInEntityData = checkInService
@@ -56,7 +56,7 @@ public class CheckInController {
         return new ResponseEntity<>(CheckIn.createCheckIn(checkInEntityData.get()), HttpStatus.OK);
     }
 
-    @GetMapping("/checkin/all")
+    @GetMapping("/all")
     ResponseEntity<List<CheckIn>> getEveryCheckInData(@RequestParam(required = false) String username) {
         return new ResponseEntity<>(modelToCheckIn(checkInService.getAllCheckIn()), HttpStatus.OK);
     }

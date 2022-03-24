@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>za.co.wethinkcode.dms</groupId>
 	<artifactId>dms</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>Developer Management System</name>
 	<description>Developer Management System (referred to as DMS), is a student portal system designed for developer institutions. It&apos;s used as a way to centralize data, show student performance, show individual student profile, get announcements, and find out about your attendance with the absenteeism feature the application.</description>
 	<properties>
