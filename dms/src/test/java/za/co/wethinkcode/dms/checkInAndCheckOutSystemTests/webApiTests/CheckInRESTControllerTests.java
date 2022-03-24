@@ -119,11 +119,12 @@ public class CheckInRESTControllerTests {
 
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/avail/checkin/tetema/2022-03-32")
+                                .get("/avail/checkin/justin/2022-03-32")
                                 .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(asJsonString(Map.of("message", "Incorrect date format"))));
+                .andExpect(content().string(containsString("Incorrect date format")));
 
     }
 
