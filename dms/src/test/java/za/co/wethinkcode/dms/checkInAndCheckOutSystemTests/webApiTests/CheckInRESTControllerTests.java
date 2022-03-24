@@ -101,7 +101,7 @@ public class CheckInRESTControllerTests {
 
     @Test
     @DisplayName("GET avail/checkin/{username}/{date} - Normal GET request")
-    void retrieveCheckInDataByDataNoDataGetTest() throws Exception {
+    void getErrorAcessingUnavailableData() throws Exception {
 
         this.mockMvc.perform(
                         MockMvcRequestBuilders
