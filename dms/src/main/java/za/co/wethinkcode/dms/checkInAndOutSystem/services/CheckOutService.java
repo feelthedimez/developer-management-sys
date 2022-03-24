@@ -47,4 +47,12 @@ public class CheckOutService {
     public List<CheckOutEntity> getAllCheckOut() {
         return checkOutRepository.findAll();
     }
+
+    public List<CheckOutEntity> getAllCheckOutBetweenDates(String username, LocalDate startDate, LocalDate endDate) {
+        return checkOutRepository.findCheckOutEntitiesByUsernameAndDateBetween(username, startDate, endDate);
+    }
+
+    public int countAllCheckOutsByDateMonthly(LocalDate startDate, LocalDate endDate) {
+        return checkOutRepository.countCheckOutEntitiesByDateBetween(startDate, endDate);
+    }
 }

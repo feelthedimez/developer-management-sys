@@ -3,6 +3,7 @@ package za.co.wethinkcode.dms.checkInAndOutSystem.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity @Table(name = "check_out")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class CheckOutEntity {
     @Id
     @Column(name="checkout_id", updatable = false, nullable = false)

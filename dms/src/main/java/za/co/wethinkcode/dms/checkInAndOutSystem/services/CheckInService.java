@@ -52,4 +52,8 @@ public class CheckInService {
         return checkInRepository.findAll();
     }
 
+    public List<CheckInEntity> getAllCheckInBetweenDates(String username, LocalDate startDate, LocalDate endDate) {
+        return checkInRepository.findCheckInEntitiesByUsernameAndDateBetween(username, startDate, endDate);
+    }
+
 }
