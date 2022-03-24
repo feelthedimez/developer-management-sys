@@ -26,7 +26,8 @@ jobs:
       
       - name: Setup MySQL
         run: |
-          sudo mysql -h localhost --port 8888 -u root -e 'CREATE DATABASE IF NOT EXISTS dms_db;'
+          sudo apt install mysql-server
+        
       
       - name: Building & Testing with Maven
         run: |
