@@ -8,8 +8,8 @@ jobs:
     env:
       working-directory: ./dms
       DB_DATABASE: test
-      DB_USER: root
-      DB_PASSWORD: 'root'
+      DB_USER: admin
+      DB_PASSWORD: 'MansGotSQL-_-'
     
     steps:
       - uses: actions/checkout@v2  
@@ -25,5 +25,5 @@ jobs:
       
       - name: Building & Testing with Maven
         run: |
-          mvn clean install -X
+          mvn clean install -X -Dmaven.test.skip
         working-directory: ${{ env.working-directory }}
