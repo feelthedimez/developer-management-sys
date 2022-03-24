@@ -26,4 +26,5 @@ jobs:
       - name: Building & Testing with Maven
         run: |
           mvn clean install -X -Dmaven.test.skip
+          mvn test
         working-directory: ${{ env.working-directory }}
