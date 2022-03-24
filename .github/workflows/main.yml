@@ -26,7 +26,7 @@ jobs:
       
       - name: Setup MySQL
         run: |
-          mysql -h 127.0.0.1 --port 8888 -u ${{ env.DB_USER }} -p ${{ env.DB_PASSWORD }} -e 'CREATE DATABASE IF NOT EXISTS test;'
+          mysql -h localhost --port 8888 -u ${{ env.DB_USER }} -p ${{ env.DB_PASSWORD }} -e 'CREATE DATABASE IF NOT EXISTS test;'
       
       - name: Building & Testing with Maven
         run: |
