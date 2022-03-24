@@ -25,7 +25,5 @@ jobs:
       
       - name: Building & Testing with Maven
         run: |
-          mvn dependency:tree
-          mvn -o install
-          mvn test
+          mvn clean install -X
         working-directory: ${{ env.working-directory }}
