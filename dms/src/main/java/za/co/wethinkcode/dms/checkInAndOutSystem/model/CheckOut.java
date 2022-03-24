@@ -33,7 +33,7 @@ public class CheckOut implements Checks {
     }
 
     public static CheckOut createCheckOut(CheckOutEntity checkOut) {
-        return new  CheckOut(checkOut);
+        return new CheckOut(checkOut);
     }
 
     private CheckOut(String username, LocalTime time, LocalDate date, boolean checkedOutLate, boolean isCheckedOut) {

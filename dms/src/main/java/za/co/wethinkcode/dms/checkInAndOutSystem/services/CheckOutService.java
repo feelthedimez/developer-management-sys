@@ -43,4 +43,8 @@ public class CheckOutService {
     public boolean doesDateAndUsernameExist(LocalDate date, String username) {
         return checkOutRepository.existsCheckInEntityByDateAndUsername(date, username);
     }
+
+    public List<CheckOutEntity> getAllCheckOut() {
+        return checkOutRepository.findAll();
+    }
 }

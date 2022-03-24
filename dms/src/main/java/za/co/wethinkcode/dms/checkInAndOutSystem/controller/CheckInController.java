@@ -14,9 +14,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/avail")
@@ -59,10 +57,9 @@ public class CheckInController {
     }
 
     @GetMapping("/checkin/all")
-    ResponseEntity<?> getEveryCheckInData() {
+    ResponseEntity<List<CheckIn>> getEveryCheckInData() {
         return new ResponseEntity<>(modelToCheckIn(checkInService.getAllCheckIn()), HttpStatus.OK);
     }
-
 
     private static String userName(String username) {
         try {
@@ -92,7 +89,6 @@ public class CheckInController {
         for (CheckInEntity checkInEntity : checkInEntities) {
             finalCheckInData.add(CheckIn.createCheckIn(checkInEntity));
         }
-
         return finalCheckInData;
     }
 

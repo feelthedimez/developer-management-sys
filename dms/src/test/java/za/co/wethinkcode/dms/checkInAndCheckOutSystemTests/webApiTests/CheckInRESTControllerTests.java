@@ -20,9 +20,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -43,7 +43,15 @@ public class CheckInRESTControllerTests {
         this.mockMvc.perform(
                 MockMvcRequestBuilders
                         .post("/avail/checkin")
-                        .content(asJsonString(Map.of("username", "tetema", "date", "2022-03-13", "time", "09:30")))
+                        .content(
+                                "{" +
+                                    "\"username\":\"tetema\"," +
+                                    "\"date\":\"2022-03-13\"," +
+                                    "\"time\":\"09:30:00\"," +
+                                    "\"userLate\":false," +
+                                    "\"userCheckedIn\":true" +
+                                "}"
+                        )
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(containsString("Check In Successful")))
@@ -70,9 +78,9 @@ public class CheckInRESTControllerTests {
 
     @Test
     @DisplayName("GET /avail/checkin/{username}/{date} - Normal GET request")
-    void retrieveDataByDateGETTest() throws Exception {
+    void retrieveCheckInDataByDateGETTest() throws Exception {
         CheckInEntity checkInEntity = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
-        when(service.getCheckInDataByDateAndUserName(LocalDate.parse("2022-03-13"), "tetema")).thenReturn(java.util.Optional.of(checkInEntity));
+        when(service.getCheckInDataByDateAndUserName(LocalDate.parse("2022-03-13"), "tetema")).thenReturn(Optional.of(checkInEntity));
 
         this.mockMvc.perform(
                 MockMvcRequestBuilders
@@ -80,18 +88,34 @@ public class CheckInRESTControllerTests {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(asJsonString(Map.of(
-                        "username", "tetema",
-                        "date", "2022-03-13",
-                        "time", "08:30:00",
-                        "userLate", false,
-                        "userCheckedIn", true
-                ))));
+                .andExpect(content().json(
+                    "{" +
+                                    "\"username\":\"tetema\"," +
+                                    "\"date\":\"2022-03-13\"," +
+                                    "\"time\":\"08:30:00\"," +
+                                    "\"userLate\":false," +
+                                    "\"userCheckedIn\":true" +
+                                "}"
+                ));
+    }
+
+    @Test
+    @DisplayName("GET avail/checkin/{username}/{date} - Normal GET request")
+    void retrieveCheckInDataByDataNoDataGetTest() throws Exception {
+
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/avail/checkin/tetema/2022-03-13")
+                                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(asJsonString(Map.of("message", "Check in data not found"))));
     }
 
     @Test
     @DisplayName("GET /avail/checkin/{username}/{date} - With invalid date format")
-    void getInvalidDateFormatWhenGETByDateTest() throws Exception {
+    void getInvalidDateFormatWhenGETByDateCheckInTest() throws Exception {
 
         this.mockMvc.perform(
                         MockMvcRequestBuilders
@@ -99,9 +123,7 @@ public class CheckInRESTControllerTests {
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json(asJsonString(Map.of(
-                        "message", "Incorrect date format"
-                ))));
+                .andExpect(content().json(asJsonString(Map.of("message", "Incorrect date format"))));
 
     }
 
@@ -117,8 +139,25 @@ public class CheckInRESTControllerTests {
                 MockMvcRequestBuilders
                         .get("/avail/checkin/all")
                         .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(
+                        "[" +
+                                "{\"username\":\"tetema\"," +
+                                "\"date\":\"2022-03-13\"," +
+                                "\"time\":\"08:30:00\"," +
+                                "\"userLate\":false," +
+                                "\"userCheckedIn\":true}" +
+                                "," +
+                                "{\"username\":\"justin\"," +
+                                "\"date\":\"2022-03-13\"," +
+                                "\"time\":\"08:32:00\"," +
+                                "\"userLate\":false," +
+                                "\"userCheckedIn\":true" +
+                                "}"+
+                        "]"))
+        ;
     }
 
     @Test

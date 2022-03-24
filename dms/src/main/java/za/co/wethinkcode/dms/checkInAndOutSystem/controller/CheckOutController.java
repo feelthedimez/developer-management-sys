@@ -15,6 +15,8 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckOutService;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -53,11 +55,7 @@ public class CheckOutController {
     }
 
     @GetMapping("checkout/{username}/{date}")
-    ResponseEntity<Checks> getCheckOutByDate(
-                @PathVariable String date,
-                @PathVariable String username
-        ) {
-
+    ResponseEntity<Checks> getCheckOutByDate(@PathVariable String date, @PathVariable String username) {
 
         Optional<CheckOutEntity> checkOutEntity = checkOutService
                 .getCheckOutDataByDateAndUserName(actualDate(date), userName(username));
@@ -65,8 +63,13 @@ public class CheckOutController {
         if(checkOutEntity.isEmpty())
             throw new CustomErrorResponseException("Check out data not found", HttpStatus.NOT_FOUND);
 
-        return  new ResponseEntity<>(CheckOut.createCheckOut(checkOutEntity.get()), HttpStatus.OK);
+        return new ResponseEntity<>(CheckOut.createCheckOut(checkOutEntity.get()), HttpStatus.OK);
 
+    }
+
+    @GetMapping("checkout/all")
+    ResponseEntity<List<CheckOut>> getEveryCheckInData() {
+        return new ResponseEntity<>(modelToCheckIn(checkOutService.getAllCheckOut()), HttpStatus.OK);
     }
 
     private static String userName(String username) {
@@ -89,6 +92,15 @@ public class CheckOutController {
                     HttpStatus.BAD_REQUEST
             );
         }
+    }
+
+    private static List<CheckOut> modelToCheckIn(List<CheckOutEntity> checkoutEntities) {
+        List<CheckOut> finalCheckInData = new ArrayList<>();
+
+        for (CheckOutEntity checkOutEntity : checkoutEntities) {
+            finalCheckInData.add(CheckOut.createCheckOut(checkOutEntity));
+        }
+        return finalCheckInData;
     }
 
 }
