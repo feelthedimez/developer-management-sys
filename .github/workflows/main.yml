@@ -26,10 +26,10 @@ jobs:
       
       - name: Setup MySQL
         run: |
-          sudo apt install mysql-server
+          echo "Database stuff here - I have to find out how to run it properly!"
         
       
       - name: Building & Testing with Maven
         run: |
-          mvn clean install -X -Dmaven.test.skip
+          echo "Running maven stuff here :)"
         working-directory: ${{ env.working-directory }}
