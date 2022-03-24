@@ -23,6 +23,9 @@ jobs:
         run: |
           sudo /etc/init.d/mysql start
       
-#       - name: Building & Testing with Maven
-#         run: mvn test
-#         working-directory: ${{ env.working-directory }}
+      - name: Building & Testing with Maven
+        run: |
+          mvn dependency:tree
+          mvn -o install
+          mvn test
+        working-directory: ${{ env.working-directory }}
