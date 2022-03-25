@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Setup MySQL
         run: |
-          mysql -h localhost --port 8888 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS test;'
+          mysql -h 127.0.0.1 --port 3306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS test;'
       
       - name: Building & Testing with Maven
         run: |
