@@ -27,7 +27,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Setup MySQL
         run: |
-          mysql --password
           echo "I have to figure it out"
       - name: Building & Testing with Maven
         run: |
