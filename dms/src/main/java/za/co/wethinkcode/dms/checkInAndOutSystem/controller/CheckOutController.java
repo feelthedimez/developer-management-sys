@@ -42,11 +42,7 @@ public class CheckOutController {
         if (!checkInService.doesDateAndUsernameExist(date, username))
             throw new CustomErrorResponseException("Never checked in...", HttpStatus.BAD_REQUEST);
 
-         else if (checkOutService.doesDateAndUsernameExist(date, username))
-            throw new CustomErrorResponseException("Already checked out", HttpStatus.BAD_REQUEST);
-
-
-        checkOutService.addCheckOut(username, time, date);
+        checkOutService.updateCheckOut(username, time, date);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check Out Successful"),

@@ -20,7 +20,7 @@ public class CheckOutService {
         this.checkOutRepository = checkOutRepository;
     }
 
-    public void addCheckOut(String username, LocalTime time, LocalDate date) {
+    public void updateCheckOut(String username, LocalTime time, LocalDate date) {
 
         CheckOutEntity checkOutEntity;
         try {
@@ -30,6 +30,10 @@ public class CheckOutService {
         }
 
         checkOutRepository.save(checkOutEntity);
+    }
+
+    public void addCheckOut(String username, LocalDate date) {
+        checkOutRepository.save(new CheckOutEntity(username, date));
     }
 
     public Optional<CheckOutEntity> getCheckOutDataByDateAndUserName(LocalDate date, String username) {

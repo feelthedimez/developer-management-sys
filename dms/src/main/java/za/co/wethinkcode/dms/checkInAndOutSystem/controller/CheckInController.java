@@ -10,6 +10,7 @@ import za.co.wethinkcode.dms.checkInAndOutSystem.exceptions.ApiSuccessResponse;
 import za.co.wethinkcode.dms.checkInAndOutSystem.model.CheckIn;
 import za.co.wethinkcode.dms.checkInAndOutSystem.model.Checks;
 import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckInService;
+import za.co.wethinkcode.dms.checkInAndOutSystem.services.CheckOutService;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -21,9 +22,12 @@ import java.util.*;
 public class CheckInController {
 
     private final CheckInService checkInService;
+    private final CheckOutService checkOutService;
 
-    public CheckInController(@Autowired CheckInService checkInService) {
+    public CheckInController(@Autowired CheckInService checkInService,
+                             @Autowired CheckOutService checkOutService) {
         this.checkInService = checkInService;
+        this.checkOutService = checkOutService;
     }
 
     @PostMapping
@@ -37,6 +41,7 @@ public class CheckInController {
             throw new CustomErrorResponseException("Already checked in", HttpStatus.BAD_REQUEST);
 
         checkInService.addACheckIn(username, time, date);
+        checkOutService.addCheckOut(username, date);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check In Successful"),

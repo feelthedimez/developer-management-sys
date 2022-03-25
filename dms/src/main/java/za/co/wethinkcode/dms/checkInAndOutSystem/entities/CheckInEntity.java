@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CheckInEntity {
     @Id
     @Column(name="checkin_id", updatable = false, nullable = false)
-    private UUID id;
+    private String id;
     @Column(name="username" ,nullable = false)
     private String username;
     @Column(name="check_in_time" , nullable = false, updatable = false)
@@ -25,7 +25,7 @@ public class CheckInEntity {
     private LocalDate date;
 
     public CheckInEntity(String username, LocalTime time, LocalDate date) {
-        this.id = UUID.randomUUID();
+        this.id = username + date.toString().replace("-", "");
         this.username = username;
         this.time = time;
         this.date = date;

@@ -25,11 +25,11 @@ public class CheckOut implements Checks {
         this.date = checkOut.getDate();
         this.time = checkOut.getTime();
         this.didUserCheckOutLate = time.isAfter(LocalTime.parse("18:00"));
-        this.isUserCheckedOut = true;
+        this.isUserCheckedOut = !checkOut.getTime().equals(LocalTime.parse("23:59:50"));
     }
 
     public static CheckOut createCheckOut(String username, LocalTime time, LocalDate date) {
-        return new CheckOut(username, time, date, time.isAfter(LocalTime.parse("18:00")), true);
+        return new CheckOut(username, time, date, time.isAfter(LocalTime.parse("18:00")), !time.equals(LocalTime.parse("23:59:50")));
     }
 
     public static CheckOut createCheckOut(CheckOutEntity checkOut) {
@@ -40,7 +40,7 @@ public class CheckOut implements Checks {
         this.username = username;
         this.time = time;
         this.date = date;
-        this.isUserCheckedOut = isCheckedOut;
+        this.isUserCheckedOut = !time.equals(LocalTime.parse("23:59:50"));
         this.didUserCheckOutLate = checkedOutLate;
     }
 

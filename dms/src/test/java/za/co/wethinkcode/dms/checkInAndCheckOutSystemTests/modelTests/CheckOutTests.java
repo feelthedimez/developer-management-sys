@@ -39,4 +39,5 @@ public class CheckOutTests {
         assertThat(checkOut.getUsername()).isNull();
         assertThat(checkOut.getTime()).isNull();
     }
+
 }
