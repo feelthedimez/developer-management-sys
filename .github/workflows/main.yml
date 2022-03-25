@@ -24,10 +24,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       
+      - uses: actions/checkout@v1
       - name: Setup MySQL
         run: |
-          echo "Database stuff here - I have to find out how to run it properly!"
-        
+          mysql -h localhost --port 8888 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS test;'
       
       - name: Building & Testing with Maven
         run: |
