@@ -1,6 +1,7 @@
 package za.co.wethinkcode.dms.checkInAndOutSystem.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckOutEntity;
 
 import java.time.LocalDate;
@@ -18,5 +19,8 @@ public interface CheckOutRepository extends JpaRepository<CheckOutEntity, String
     int countCheckOutEntitiesByDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<CheckOutEntity> findCheckOutEntitiesByUsernameAndDateBetween(String username, LocalDate startDate, LocalDate endDate);
+
+//    @Query()
+//    double getHours();
 
 }
