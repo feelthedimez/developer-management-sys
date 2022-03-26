@@ -3,6 +3,7 @@ package za.co.wethinkcode.dms.checkInAndOutSystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckOutEntity;
@@ -43,7 +44,6 @@ public class ChecksController {
 
         return new ResponseEntity<>("stuff", HttpStatus.OK);
     }
-
 
     private static LocalDate actualDate(String date) {
         try {
