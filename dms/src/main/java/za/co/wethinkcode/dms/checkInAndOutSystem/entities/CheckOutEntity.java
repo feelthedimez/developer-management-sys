@@ -32,6 +32,13 @@ public class CheckOutEntity {
         this.date = date;
     }
 
+    public CheckOutEntity(String id, String username, LocalTime time, LocalDate date) {
+        this.id = id;
+        this.username = username;
+        this.time = time;
+        this.date = date;
+    }
+
     public CheckOutEntity(String username, LocalDate date) {
         this.id = username + date.toString().replace("-", "");
         this.username = username;

@@ -32,7 +32,7 @@ public class CheckOutController {
         this.checkInService = checkInService;
     }
 
-    @PostMapping("checkout")
+    @PutMapping("checkout")
     ResponseEntity<?> createCheckOut(@RequestBody CheckOut checkOut) {
 
         LocalDate date = checkOut.getDate();
@@ -42,7 +42,7 @@ public class CheckOutController {
         if (!checkInService.doesDateAndUsernameExist(date, username))
             throw new CustomErrorResponseException("Never checked in...", HttpStatus.BAD_REQUEST);
 
-        checkOutService.updateCheckOut(username, time, date);
+        checkOutService.updateCheckOut(username+date.toString().replace("-", ""),username, time, date);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check Out Successful"),

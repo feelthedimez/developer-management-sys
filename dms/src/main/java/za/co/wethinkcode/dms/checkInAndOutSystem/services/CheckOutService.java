@@ -20,11 +20,11 @@ public class CheckOutService {
         this.checkOutRepository = checkOutRepository;
     }
 
-    public void updateCheckOut(String username, LocalTime time, LocalDate date) {
+    public void updateCheckOut(String id, String username, LocalTime time, LocalDate date) {
 
         CheckOutEntity checkOutEntity;
         try {
-            checkOutEntity = new CheckOutEntity(username, time, date);
+            checkOutEntity = new CheckOutEntity(id, username, time, date);
         } catch (Exception e) {
             throw new CustomErrorWithDataException(e.getMessage());
         }

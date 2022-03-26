@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckInEntity;
 import za.co.wethinkcode.dms.checkInAndOutSystem.entities.CheckOutEntity;
@@ -46,7 +47,7 @@ public class CheckOutRESTControllerTests {
     void normalCheckOutPostWithCheckInButNeverCheckInTest() throws Exception {
         this.mockMvc.perform(
                 MockMvcRequestBuilders
-                        .post("/avail/checkout")
+                        .put("/avail/checkout")
                         .content(asJsonString(Map.of("username", "tetema", "date", "2022-03-13", "time", "14:30")))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
