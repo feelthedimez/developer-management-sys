@@ -62,7 +62,17 @@ public class CheckInController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<List<CheckIn>> getEveryCheckInData(@RequestParam(required = false) String username) {
+    ResponseEntity<List<CheckIn>> getEveryCheckInData(
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String date) {
+
+        if (!Objects.isNull(username)) return new ResponseEntity<>(
+                modelToCheckIn(checkInService.getAllCheckInDataByUserName(username)),
+                HttpStatus.OK);
+        else if (!Objects.isNull(date)) return new ResponseEntity<>(
+                modelToCheckIn(checkInService.getAllCheckInDataByDate(actualDate(date))),
+                HttpStatus.OK);
+
         return new ResponseEntity<>(modelToCheckIn(checkInService.getAllCheckIn()), HttpStatus.OK);
     }
 
