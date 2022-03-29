@@ -31,15 +31,4 @@ public class ExceptionAdviceController {
         return new ResponseEntity<>(new ErrorResponse(httpStatus, e.getMessage(), stackTrace), httpStatus);
     }
 
-    @ExceptionHandler(DateErrorException.class)
-    public ResponseEntity<ErrorResponse> handleDateErrorExceptions(DateTimeException e) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        e.printStackTrace(printWriter);
-        String stackTrace = stringWriter.toString();
-
-        return new ResponseEntity<>(new ErrorResponse(status, e.getMessage(), stackTrace), status);
-    }
 }
