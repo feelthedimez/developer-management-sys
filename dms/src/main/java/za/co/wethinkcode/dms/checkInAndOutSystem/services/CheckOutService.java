@@ -20,11 +20,12 @@ public class CheckOutService {
         this.checkOutRepository = checkOutRepository;
     }
 
-    public void updateCheckOut(String id, String username, LocalTime time, LocalDate date) {
+    public void updateCheckOut(String id, String username, String phoneNumber, LocalTime time, LocalDate date) {
 
+        System.out.println(id);
         CheckOutEntity checkOutEntity;
         try {
-            checkOutEntity = new CheckOutEntity(id, username, time, date);
+            checkOutEntity = new CheckOutEntity(id, phoneNumber,username, time, date);
         } catch (Exception e) {
             throw new CustomErrorWithDataException(e.getMessage());
         }
@@ -32,8 +33,8 @@ public class CheckOutService {
         checkOutRepository.save(checkOutEntity);
     }
 
-    public void addCheckOut(String username, LocalDate date) {
-        checkOutRepository.save(new CheckOutEntity(username, date));
+    public void addCheckOut(String username, LocalDate date, String phoneNumber) {
+        checkOutRepository.save(new CheckOutEntity(username, date, phoneNumber));
     }
 
     public Optional<CheckOutEntity> getCheckOutDataByDateAndUserName(LocalDate date, String username) {

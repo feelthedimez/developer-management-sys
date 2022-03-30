@@ -24,7 +24,7 @@ public class CheckInService {
 
         CheckInEntity checkInEntity;
         try {
-            checkInEntity = new CheckInEntity(username, time, date, phoneNumber);
+            checkInEntity = new CheckInEntity(username, phoneNumber, time, date);
         } catch (Exception e) {
             throw new CustomErrorWithDataException(e.getMessage());
         }

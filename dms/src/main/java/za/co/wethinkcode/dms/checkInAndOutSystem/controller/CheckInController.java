@@ -42,7 +42,7 @@ public class CheckInController {
             throw new CustomErrorResponseException("Already checked in", HttpStatus.BAD_REQUEST);
 
         checkInService.addACheckIn(username, time, date, phoneNumber);
-        checkOutService.addCheckOut(username, date);
+        checkOutService.addCheckOut(username, date, phoneNumber);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check In Successful"),

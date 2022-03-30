@@ -28,7 +28,7 @@ public class CheckIn implements Checks {
         return new CheckIn(checkInEntity);
     }
 
-    private CheckIn( String username, String phoneNumber,LocalTime time, LocalDate date, boolean isLate, boolean isCheckedIn) {
+    private CheckIn( String username, String phoneNumber, LocalTime time, LocalDate date, boolean isLate, boolean isCheckedIn) {
         this.username = username;
         this.time = time;
         this.date = date;

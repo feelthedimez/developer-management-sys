@@ -25,24 +25,29 @@ public class CheckOutEntity {
     private LocalTime time;
     @Column(name="check_out_date", nullable = false)
     private LocalDate date;
+    @Column(name="phone_number", nullable = false, updatable = false)
+    private String phoneNumber;
 
-    public CheckOutEntity(String username, LocalTime time, LocalDate date) {
+    public CheckOutEntity(String username, String phoneNumber, LocalTime time, LocalDate date) {
         this.username = username;
+        this.phoneNumber = phoneNumber;
         this.time = time;
         this.date = date;
     }
 
-    public CheckOutEntity(String id, String username, LocalTime time, LocalDate date) {
+    public CheckOutEntity(String id, String username, String phoneNumber, LocalTime time, LocalDate date) {
         this.id = id;
         this.username = username;
+        this.phoneNumber = phoneNumber;
         this.time = time;
         this.date = date;
     }
 
-    public CheckOutEntity(String username, LocalDate date) {
+    public CheckOutEntity(String username, LocalDate date, String phoneNumber) {
         this.id = username + date.toString().replace("-", "");
         this.username = username;
         this.date = date;
+        this.phoneNumber = phoneNumber;
         this.time = LocalTime.parse("23:59:50");
     }
 

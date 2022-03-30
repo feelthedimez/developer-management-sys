@@ -26,7 +26,7 @@ public class CheckInEntity {
     @Column(name="phone_number", nullable = false, updatable = false)
     private String phoneNumber;
 
-    public CheckInEntity(String username, LocalTime time, LocalDate date, String phoneNumber) {
+    public CheckInEntity(String username, String phoneNumber, LocalTime time, LocalDate date) {
         this.id = username + date.toString().replace("-", "");
         this.username = username;
         this.time = time;

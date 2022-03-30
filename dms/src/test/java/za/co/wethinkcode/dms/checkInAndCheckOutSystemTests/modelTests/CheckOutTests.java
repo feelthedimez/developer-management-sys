@@ -14,7 +14,7 @@ public class CheckOutTests {
     @Test
     @DisplayName("A normal checkout")
     void TestNormalCheckOut() {
-        CheckOut checkOut = CheckOut.createCheckOut("tetema", LocalTime.parse("16:30"), LocalDate.now());
+        CheckOut checkOut = CheckOut.createCheckOut("tetema", "",LocalTime.parse("16:30"), LocalDate.now());
         assertThat(checkOut).isNotNull();
         assertThat(checkOut.isUserCheckedOut()).isTrue();
         assertThat(checkOut.isDidUserCheckOutLate()).isFalse();
@@ -23,7 +23,7 @@ public class CheckOutTests {
     @Test
     @DisplayName("Check when you checkout late")
     void TestCheckOutLate() {
-        CheckOut checkOut = CheckOut.createCheckOut("tetema", LocalTime.parse("18:20"), LocalDate.now());
+        CheckOut checkOut = CheckOut.createCheckOut("tetema", "",LocalTime.parse("18:20"), LocalDate.now());
         assertThat(checkOut).isNotNull();
         assertThat(checkOut.isUserCheckedOut()).isTrue();
         assertThat(checkOut.getDate()).isEqualTo(LocalDate.now());

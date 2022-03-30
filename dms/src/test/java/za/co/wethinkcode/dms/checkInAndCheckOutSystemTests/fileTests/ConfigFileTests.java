@@ -16,8 +16,6 @@ public class ConfigFileTests {
 
     @Test
     void whenFactoryProvidedThenYamlPropertiesInjected() {
-//        assertThat(config.getPhoneNumber()).isNotNull();
-//        assertThat(config.getAccountSid()).isNotNull();
-//        assertThat(config.getAuthToken()).isNotNull();
+        // TODO: I have to test if the application can read files
     }
 }

@@ -64,7 +64,7 @@ public class CheckOutRESTControllerTests {
     @Test
     @DisplayName("GET avail/checkout/{username}/{date} - Normal GET request")
     void retrieveCheckOutDataByDateGETTEst() throws Exception {
-        CheckOutEntity checkOutEntity = new CheckOutEntity("tetema", LocalTime.parse("17:30"), LocalDate.parse("2022-03-13"));
+        CheckOutEntity checkOutEntity = new CheckOutEntity("tetema", "",LocalTime.parse("17:30"), LocalDate.parse("2022-03-13"));
         when(checkOutService.getCheckOutDataByDateAndUserName(LocalDate.parse("2022-03-13"), "tetema")).thenReturn(Optional.of(checkOutEntity));
 
         this.mockMvc.perform(
@@ -116,8 +116,8 @@ public class CheckOutRESTControllerTests {
     @Test
     @DisplayName("GET avail/checkout/all - Get every checkout data in the database")
     void getAllCheckOutDataTest() throws Exception {
-        CheckOutEntity checkOutEntity1 = new CheckOutEntity("tetema", LocalTime.parse("15:30"), LocalDate.parse("2022-03-13"));
-        CheckOutEntity checkOutEntity2 = new CheckOutEntity("justin", LocalTime.parse("18:30"), LocalDate.parse("2022-03-13"));
+        CheckOutEntity checkOutEntity1 = new CheckOutEntity("tetema", "", LocalTime.parse("15:30"), LocalDate.parse("2022-03-13"));
+        CheckOutEntity checkOutEntity2 = new CheckOutEntity("justin", "", LocalTime.parse("18:30"), LocalDate.parse("2022-03-13"));
         when(checkOutService.getAllCheckOut()).thenReturn(new ArrayList<>(Arrays.asList(checkOutEntity1, checkOutEntity2)));
 
         this.mockMvc.perform(

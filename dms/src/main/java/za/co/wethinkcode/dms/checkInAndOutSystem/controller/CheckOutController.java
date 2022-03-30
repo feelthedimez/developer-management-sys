@@ -38,11 +38,12 @@ public class CheckOutController {
         LocalDate date = checkOut.getDate();
         LocalTime time = checkOut.getTime();
         String username = checkOut.getUsername();
+        String phoneNumber = checkOut.getPhoneNumber();
 
         if (!checkInService.doesDateAndUsernameExist(date, username))
             throw new CustomErrorResponseException("Never checked in...", HttpStatus.BAD_REQUEST);
 
-        checkOutService.updateCheckOut(username+date.toString().replace("-", ""),username, time, date);
+        checkOutService.updateCheckOut(modifyId(username, date), username, phoneNumber, time, date);
 
         return new ResponseEntity<>(
                 new ApiSuccessResponse(201, "Check Out Successful"),
@@ -97,6 +98,10 @@ public class CheckOutController {
             finalCheckInData.add(CheckOut.createCheckOut(checkOutEntity));
         }
         return finalCheckInData;
+    }
+
+    private static String modifyId(String username, LocalDate date) {
+        return username + date.toString().replace("-", "");
     }
 
 }
