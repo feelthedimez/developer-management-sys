@@ -23,11 +23,14 @@ public class CheckInEntity {
     private LocalTime time;
     @Column(name="check_in_date", nullable = false, updatable = false)
     private LocalDate date;
+    @Column(name="phone_number", nullable = false, updatable = false)
+    private String phoneNumber;
 
-    public CheckInEntity(String username, LocalTime time, LocalDate date) {
+    public CheckInEntity(String username, LocalTime time, LocalDate date, String phoneNumber) {
         this.id = username + date.toString().replace("-", "");
         this.username = username;
         this.time = time;
         this.date = date;
+        this.phoneNumber = phoneNumber;
     }
 }

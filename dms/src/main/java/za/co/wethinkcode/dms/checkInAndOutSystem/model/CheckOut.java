@@ -20,6 +20,9 @@ public class CheckOut implements Checks {
     private boolean didUserCheckOutLate;
     private boolean isUserCheckedOut;
 
+    // TODO: Create an entity to store student profiles; the profile has all the details
+
+
     public CheckOut(CheckOutEntity checkOut) {
         this.username = checkOut.getUsername();
         this.date = checkOut.getDate();

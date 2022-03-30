@@ -20,11 +20,11 @@ public class CheckInService {
         this.checkInRepository = checkInRepository;
     }
 
-    public void addACheckIn(String username, LocalTime time, LocalDate date) {
+    public void addACheckIn(String username, LocalTime time, LocalDate date, String phoneNumber) {
 
         CheckInEntity checkInEntity;
         try {
-            checkInEntity = new CheckInEntity(username, time, date);
+            checkInEntity = new CheckInEntity(username, time, date, phoneNumber);
         } catch (Exception e) {
             throw new CustomErrorWithDataException(e.getMessage());
         }

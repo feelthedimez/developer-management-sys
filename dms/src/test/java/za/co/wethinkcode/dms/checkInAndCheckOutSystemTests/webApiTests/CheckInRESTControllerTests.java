@@ -79,7 +79,11 @@ public class CheckInRESTControllerTests {
     @Test
     @DisplayName("GET /avail/checkin/{username}/{date} - Normal GET request")
     void retrieveCheckInDataByDateGETTest() throws Exception {
-        CheckInEntity checkInEntity = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
+        CheckInEntity checkInEntity = new CheckInEntity(
+                "tetema",
+                LocalTime.parse("08:30"),
+                LocalDate.parse("2022-03-13"),
+                "+27682733424");
         when(service.getCheckInDataByDateAndUserName(LocalDate.parse("2022-03-13"), "tetema")).thenReturn(Optional.of(checkInEntity));
 
         this.mockMvc.perform(
@@ -94,7 +98,8 @@ public class CheckInRESTControllerTests {
                                     "\"date\":\"2022-03-13\"," +
                                     "\"time\":\"08:30:00\"," +
                                     "\"userLate\":false," +
-                                    "\"userCheckedIn\":true" +
+                                    "\"userCheckedIn\":true," +
+                                    "\"phoneNumber\":\"+27682733424\"" +
                                 "}"
                 ));
     }
@@ -132,8 +137,16 @@ public class CheckInRESTControllerTests {
     @Test
     @DisplayName("GET /checkin/all/ - Get every checkin data in the database")
     void getAllCheckInDataTest() throws Exception {
-        CheckInEntity checkInEntity1 = new CheckInEntity("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
-        CheckInEntity checkInEntity2 = new CheckInEntity("justin", LocalTime.parse("08:32"), LocalDate.parse("2022-03-13"));
+        CheckInEntity checkInEntity1 = new CheckInEntity(
+                "tetema",
+                LocalTime.parse("08:30"),
+                LocalDate.parse("2022-03-13"),
+                "+27682733424");
+        CheckInEntity checkInEntity2 = new CheckInEntity(
+                "justin",
+                LocalTime.parse("08:32"),
+                LocalDate.parse("2022-03-13"),
+                "+27682733424");
         when(service.getAllCheckIn()).thenReturn(new ArrayList<>(Arrays.asList(checkInEntity1, checkInEntity2)));
 
         this.mockMvc.perform(

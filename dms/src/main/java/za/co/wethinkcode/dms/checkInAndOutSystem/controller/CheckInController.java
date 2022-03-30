@@ -36,11 +36,12 @@ public class CheckInController {
         LocalDate date = checkIn.getDate();
         LocalTime time = checkIn.getTime();
         String username = checkIn.getUsername();
+        String phoneNumber = checkIn.getPhoneNumber();
 
         if(checkInService.doesDateAndUsernameExist(date, username))
             throw new CustomErrorResponseException("Already checked in", HttpStatus.BAD_REQUEST);
 
-        checkInService.addACheckIn(username, time, date);
+        checkInService.addACheckIn(username, time, date, phoneNumber);
         checkOutService.addCheckOut(username, date);
 
         return new ResponseEntity<>(

@@ -5,8 +5,8 @@ public class SmsRequest {
     private final String message;
 
 
-    public SmsRequest(String phoneNuber, String message) {
-        this.phoneNumber = phoneNuber;
+    public SmsRequest(String phoneNumber, String message) {
+        this.phoneNumber = phoneNumber;
         this.message = message;
     }
 
@@ -21,7 +21,7 @@ public class SmsRequest {
     @Override
     public String toString() {
         return "SmsRequest{" +
-                "phoneNuber='" + phoneNumber + '\'' +
+                "phoneNumber='" + phoneNumber + '\'' +
                 ", message='" + message + '\'' +
                 '}';
     }

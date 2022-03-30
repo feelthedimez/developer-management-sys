@@ -14,7 +14,7 @@ public class CheckInTests {
     @Test
     @DisplayName("A normal checking in")
     void testNormalCheckIn() {
-        CheckIn checkIn = CheckIn.createCheckIn("tetema", LocalTime.parse("08:30"), LocalDate.now());
+        CheckIn checkIn = CheckIn.createCheckIn("tetema", "",LocalTime.parse("08:30"), LocalDate.now());
         assertThat(checkIn).isNotNull();
         assertThat(checkIn.isUserCheckedIn()).isTrue();
         assertThat(checkIn.isUserLate()).isFalse();
@@ -24,7 +24,7 @@ public class CheckInTests {
     @Test
     @DisplayName("Check when you check in late")
     void testCheckInLateTime() {
-        CheckIn checkIn = CheckIn.createCheckIn("tetema", LocalTime.parse("14:30"), LocalDate.parse("2022-03-13"));
+        CheckIn checkIn = CheckIn.createCheckIn("tetema", "",LocalTime.parse("14:30"), LocalDate.parse("2022-03-13"));
         assertThat(checkIn.isUserLate()).isTrue();
         assertThat(checkIn).isNotNull();
         assertThat(checkIn.getDate()).isEqualTo(LocalDate.parse("2022-03-13"));
@@ -33,7 +33,7 @@ public class CheckInTests {
     @Test
     @DisplayName("Check if you check in early or on time")
     void testCheckInEarlyTime() {
-        CheckIn checkIn = CheckIn.createCheckIn("tetema", LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
+        CheckIn checkIn = CheckIn.createCheckIn("tetema", "",LocalTime.parse("08:30"), LocalDate.parse("2022-03-13"));
         assertThat(checkIn).isNotNull();
         assertThat(checkIn.isUserLate()).isFalse();
         assertThat(checkIn.getDate()).isEqualTo(LocalDate.parse("2022-03-13"));
